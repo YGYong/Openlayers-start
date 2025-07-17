@@ -131,11 +131,6 @@ export default defineConfig({
                 },
               ],
             },
-
-            // { text: "实践2", link: "/Practice/01_.md" },
-            // { text: "实践3", link: "/Practice/02_.md" },
-            // { text: "实践4", link: "/Practice/03_.md" },
-            // { text: "实践5", link: "/Practice/04_.md" },
           ],
         },
       ],
@@ -148,7 +143,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/YGYong/cesium-start" },
+      { icon: "github", link: "https://github.com/YGYong/Openlayers-start" },
     ],
     docFooter: {
       prev: "上一页",

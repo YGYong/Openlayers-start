@@ -1,35 +1,63 @@
 # Layer 对象
 
-OpenLayers 中的图层(Layers)是地图数据可视化的核心组件，定义了数据如何被渲染和显示。结合 Source、Style 等灵活配置，它们构成了地图的基本元素。
+OpenLayers 的图层系统负责数据渲染与可视化，是地图内容组织的核心单元。不同图层类型处理不同数据格式，配合 Source 和 Style 实现灵活的地图呈现。
 
 ![Layer类图](../Aassets/layer导图.png)
 
-## 常见图层类型
+> **核心概念**：
+>
+> - 每个图层必须绑定一个数据源（Source）
+> - 图层渲染顺序由`zIndex`控制（值越大越靠上）
+> - 可通过`minZoom`/`maxZoom`控制可见缩放级别
 
-| 图层类型          | 类名                  | 说明                       |
-| ----------------- | --------------------- | -------------------------- |
-| TileLayer(重要)   | `ol/layer/Tile`       | 瓦片图层，常用于底图       |
-| ImageLayer        | `ol/layer/Image`      | 单张图片图层               |
-| VectorLayer(重要) | `ol/layer/Vector`     | 矢量要素图层               |
-| VectorTileLayer   | `ol/layer/VectorTile` | 矢量瓦片图层               |
-| HeatmapLayer      | `ol/layer/Heatmap`    | 热力图层                   |
-| GroupLayer        | `ol/layer/Group`      | 图层组，可嵌套管理多个图层 |
+## 图层类型速查
+
+| 图层类型               | 类名                  | 用途描述                   |
+| ---------------------- | --------------------- | -------------------------- |
+| **TileLayer** (重要)   | `ol/layer/Tile`       | 加载瓦片地图（OSM/高德等） |
+| **VectorLayer** (重要) | `ol/layer/Vector`     | 渲染矢量要素（点/线/面）   |
+| ImageLayer             | `ol/layer/Image`      | 加载单张图片或 WMS 服务    |
+| VectorTileLayer        | `ol/layer/VectorTile` | 加载矢量瓦片（Mapbox 等）  |
+| HeatmapLayer           | `ol/layer/Heatmap`    | 热力图可视化               |
+| GroupLayer             | `ol/layer/Group`      | 图层组管理                 |
 
 ## 核心公共属性
 
-| 属性名        | 类型         | 默认值     | 描述                                           |
-| ------------- | ------------ | ---------- | ---------------------------------------------- |
-| source        | ol.source.\* | undefined  | 图层的数据源（必需）                           |
-| opacity       | number       | 1          | 图层透明度（0-1）                              |
-| visible       | boolean      | true       | 图层是否可见                                   |
-| extent        | Array        | undefined  | 图层渲染的边界范围（[minx, miny, maxx, maxy]） |
-| zIndex        | number       | 0          | 图层叠加顺序（值越大显示在越上层）             |
-| minResolution | number       | undefined  | 图层可见的最小分辨率（小于此值不显示）         |
-| maxResolution | number       | undefined  | 图层可见的最大分辨率（大于此值不显示）         |
-| minZoom       | number       | undefined  | 图层可见的最小缩放级别                         |
-| maxZoom       | number       | undefined  | 图层可见的最大缩放级别                         |
-| className     | string       | 'ol-layer' | 图层元素的 CSS 类名                            |
-| properties    | Object       | {}         | 自定义属性（用于存储任意业务数据）             |
+| 属性名          | 类型            | 默认值       | 描述                                |
+| --------------- | --------------- | ------------ | ----------------------------------- |
+| `source`        | `ol.source.*`   | `undefined`  | **必需**，图层数据源                |
+| `opacity`       | `number`        | `1`          | 透明度（0-1）                       |
+| `visible`       | `boolean`       | `true`       | 是否可见                            |
+| `extent`        | `Array<number>` | `undefined`  | 渲染范围 `[minx, miny, maxx, maxy]` |
+| `zIndex`        | `number`        | `0`          | 图层叠放顺序（值大的在上层）        |
+| `minResolution` | `number`        | `undefined`  | 最小分辨率（小于此值不显示）        |
+| `maxResolution` | `number`        | `undefined`  | 最大分辨率（大于此值不显示）        |
+| `minZoom`       | `number`        | `undefined`  | 最小缩放级别（小于此级别不显示）    |
+| `maxZoom`       | `number`        | `undefined`  | 最大缩放级别（大于此级别不显示）    |
+| `className`     | `string`        | `'ol-layer'` | 图层容器的 CSS 类名                 |
+| `properties`    | `Object`        | `{}`         | 自定义属性（存储业务数据）          |
+
+## 核心公共方法
+
+| 方法签名                | 返回值    | 描述               |
+| ----------------------- | --------- | ------------------ |
+| `getOpacity()`          | `number`  | 获取当前透明度     |
+| `setOpacity(opacity)`   | `void`    | 设置透明度（0-1）  |
+| `getVisible()`          | `boolean` | 获取可见状态       |
+| `setVisible(visible)`   | `void`    | 设置可见性         |
+| `getExtent()`           | `Array`   | 获取渲染范围       |
+| `setExtent(extent)`     | `void`    | 设置渲染范围       |
+| `getZIndex()`           | `number`  | 获取 zIndex 值     |
+| `setZIndex(zIndex)`     | `void`    | 设置 zIndex 值     |
+| `getMinResolution()`    | `number`  | 获取最小分辨率     |
+| `setMinResolution(res)` | `void`    | 设置最小分辨率     |
+| `getMaxResolution()`    | `number`  | 获取最大分辨率     |
+| `setMaxResolution(res)` | `void`    | 设置最大分辨率     |
+| `getSource()`           | `Source`  | 获取数据源实例     |
+| `setSource(source)`     | `void`    | 更换数据源         |
+| `getProperties()`       | `Object`  | 获取所有自定义属性 |
+| `set(key, value)`       | `void`    | 设置单个自定义属性 |
+| `get(key)`              | `any`     | 获取自定义属性值   |
 
 ```js
 const layer = new ol.layer.Tile({
@@ -44,39 +72,14 @@ const layer = new ol.layer.Tile({
   maxZoom: 20, // 最大缩放级别
   className: "my-tile-layer", // CSS 类名
   properties: {
+    id: "base-map",
     customProperty: "custom value",
   }, // 自定义属性
 });
-```
+// 读取自定义属性
+layer.get("id"); // 'base-map'
 
-## 核心公共方法
-
-| 方法名                | 返回值       | 描述                             |
-| --------------------- | ------------ | -------------------------------- |
-| getOpacity()          | number       | 获取图层透明度                   |
-| setOpacity(opacity)   | void         | 设置图层透明度                   |
-| getVisible()          | boolean      | 获取图层可见性                   |
-| setVisible(visible)   | void         | 设置图层可见性                   |
-| getExtent()           | Array        | 获取图层范围                     |
-| setExtent(extent)     | void         | 设置图层范围                     |
-| getZIndex()           | number       | 获取图层叠加顺序                 |
-| setZIndex(zindex)     | void         | 设置图层叠加顺序                 |
-| getMinResolution()    | number       | 获取最小分辨率                   |
-| setMinResolution(res) | void         | 设置最小分辨率（小于此值不显示） |
-| getMaxResolution()    | number       | 获取最大分辨率                   |
-| setMaxResolution(res) | void         | 设置最大分辨率（大于此值不显示） |
-| getSource()           | ol.source.\* | 获取数据源                       |
-| setSource(source)     | void         | 设置数据源                       |
-| getProperties()       | Object       | 获取所有自定义属性               |
-| set(key, value)       | void         | 设置自定义属性                   |
-| get(key)              | any          | 获取自定义属性                   |
-
-```js
-const layer = new ol.layer.Tile({
-  source: new ol.source.OSM(),
-});
-
-layer.getProperties(); // {customProperty: 'custom value'}
+layer.getProperties(); // {id: 'base-map', customProperty: 'custom value'}
 
 layer.getOpacity(); // 0.5
 
@@ -85,27 +88,25 @@ layer.getVisible(); // true
 
 ## 1. TileLayer - 瓦片图层
 
-用于加载如 OSM、WMTS、高德、天地图等瓦片地图服务。
+用于加载预切片的栅格地图服务（如 OSM、高德、天地图）。
 
-特有属性：
-| 属性名 | 类型 | 默认值 | 描述 |
-| ---------- | ------ | --------- | ------------ |
-| background | string | undefined | 图层背景颜色 |
+### 特有属性
+
+| 属性名       | 类型     | 默认值      | 描述                            |
+| ------------ | -------- | ----------- | ------------------------------- |
+| `preload`    | `number` | `0`         | 预加载瓦片层级数,0 表示不预加载 |
+| `background` | `string` | `undefined` | 背景色（瓦片间隙）              |
 
 ### TileSource - 数据源
 
-`Layer`和`Source`不分家，每一个`Layer`都有一个`Source`，`Layer`负责数据的渲染，`Source`负责数据的获取，所以`Source`的大部分内容我都放在与`Layer`一起说明
-
 瓦片图层数据源(Tile Source)负责提供瓦片地图的原始数据，定义了瓦片的获取方式、格式和加载策略。它是瓦片图层(TileLayer)的核心组成部分。
 
-| 类型     | 介绍                    |
-| -------- | ----------------------- |
-| OSM      | 加载 OpenStreetMap 瓦片 |
-| XYZ      | 加载标准 XYZ 格式瓦片   |
-| WMTS     | 加载 OGC WMTS 服务瓦片  |
-| WMS      | 加载 WMS 服务瓦片       |
-| TMS      | 加载 TMS 格式瓦片       |
-| BingMaps | 加载 Bing 地图瓦片      |
+| 类型     | 类名                | 描述                   | 引入路径                                  |
+| -------- | ------------------- | ---------------------- | ----------------------------------------- |
+| **OSM**  | `ol/source/OSM`     | OpenStreetMap 瓦片     | `import OSM from 'ol/source/OSM'`         |
+| **XYZ**  | `ol/source/XYZ`     | 标准 XYZ 格式瓦片      | `import XYZ from 'ol/source/XYZ'`         |
+| **WMTS** | `ol/source/WMTS`    | OGC WMTS 服务          | `import WMTS from 'ol/source/WMTS'`       |
+| **WMS**  | `ol/source/TileWMS` | OGC WMS 服务（瓦片版） | `import TileWMS from 'ol/source/TileWMS'` |
 
 #### OSM
 
@@ -142,7 +143,7 @@ const tileLayer = new TileLayer({
 });
 ```
 
-#### WMS
+#### GeoServer WMS
 
 ```js
 import TileLayer from "ol/layer/Tile.js";
@@ -169,17 +170,14 @@ map.addLayer(wmsLayer);
 
 ## 2. ImageLayer - 图片图层
 
-用于加载单张图片或 WMS 服务。
+用于显示单张静态图片或动态生成的图片（如 WMS 服务返回的图片）
 
 ### ImageSource - 数据源
 
-ImageLayer 使用单一图像覆盖整个地图视图范围，其数据源负责获取和生成这张图像
-
-| 类型            | 介绍                      |
-| --------------- | ------------------------- |
-| ImageStatic     | 加载静态图像              |
-| ImageWMS        | 加载 WMS 服务图像         |
-| ImageArcGISRest | 加载 ArcGIS Rest 服务图像 |
+| 类型            | 类名                    | 描述         |
+| --------------- | ----------------------- | ------------ |
+| **ImageStatic** | `ol/source/ImageStatic` | 静态图片     |
+| **ImageWMS**    | `ol/source/ImageWMS`    | WMS 服务图片 |
 
 #### ImageStatic - 静态图像
 
@@ -200,16 +198,25 @@ map.addLayer(imageLayer);
 
 ---
 
-## 3. VectorLayer - 矢量图层
+## 3. VectorLayer - 矢量图层（重点）
 
-用于显示点、线、面等地理要素。直接在客户端渲染矢量数据，支持 GeoJSON、KML 等格式，动态修改要素和样式
+直接在客户端渲染矢量数据（点/线/面），支持动态修改和交互。
 
-特有属性：
+### 特有属性
 
-| 属性名        | 类型           | 默认值    | 描述         |
-| ------------- | -------------- | --------- | ------------ |
-| background    | string         | undefined | 图层背景颜色 |
-| style（重要） | ol.style.Style | undefined | 矢量要素样式 |
+| 属性名       | 类型              | 默认值      | 描述                     |
+| ------------ | ----------------- | ----------- | ------------------------ |
+| `style`      | `Style\|Function` | `undefined` | 要素样式（支持动态函数） |
+| `background` | `string`          | `undefined` | 背景色                   |
+
+> - 复杂样式建议使用`StyleFunction`动态计算
+
+### 特有方法
+
+| 方法名            | 返回值  | 描述         |
+| ----------------- | ------- | ------------ |
+| `setStyle(style)` | `void`  | 设置图层样式 |
+| `getStyle()`      | `Style` | 获取图层样式 |
 
 ### VectorSource - 数据源
 
@@ -221,43 +228,39 @@ map.addLayer(imageLayer);
 | KML     | 加载 KML 格式矢量数据     |
 | Vector  | 加载矢量要素              |
 
-#### 核心属性
+#### VectorSource - 核心属性
 
-- 加载矢量数据：Feature -> VectorSource（features 属性加载） -> VectorLayer
-- 加载空间数据（GeoJson 等）：VectorSource（url 属性加载） -> VectorLayer
+| 属性              | 类型              | 默认值 | 描述                                                 |
+| ----------------- | ----------------- | ------ | ---------------------------------------------------- |
+| `features`        | `Array<Feature>`  | `[]`   | 初始要素数组                                         |
+| `url`             | `string`          | `null` | 远程数据 URL                                         |
+| `format`          | `ol.format.*`     | `null` | 数据解析格式（GeoJSON 等）                           |
+| `loader`          | `function`        | `null` | 自定义加载函数                                       |
+| `strategy`        | `LoadingStrategy` |        | 加载策略（控制何时加载数据），默认一次性加载所有要素 |
+| `overlaps`        | `boolean`         | `true` | 是否允许要素重叠（性能优化）                         |
+| `useSpatialIndex` | `boolean`         | `true` | 是否启用空间索引（查询优化）                         |
+| `wrapX`           | `boolean`         | `true` | 是否在水平方向重复要素（适用于全球地图）             |
 
-| 属性名          | 类型              | 默认值 | 描述                                            |
-| --------------- | ----------------- | ------ | ----------------------------------------------- |
-| features        | Array             | []     | 数据源中的要素数组                              |
-| url             | string            | null   | 数据源的 URL（用于远程加载）                    |
-| format          | ol.format.Feature | null   | 数据解析格式（如 GeoJSON、KML 等）              |
-| loader          | function          | null   | 自定义加载函数                                  |
-| strategy        | function          | all    | 加载策略（控制何时加载数据）                    |
-| overlaps        | boolean           | true   | 要素是否允许重叠（设置为 false 可优化渲染性能） |
-| useSpatialIndex | boolean           | true   | 是否使用空间索引（对于频繁交互的场景建议开启）  |
-| wrapX           | boolean           | true   | 是否在水平方向重复要素（适用于全球地图）        |
+#### VectorSource - 核心方法
 
-#### 核心方法
-
-| 方法名                                    | 返回值  | 描述                                   |
-| ----------------------------------------- | ------- | -------------------------------------- |
-| addFeature(feature)                       | void    | 添加单个要素                           |
-| addFeatures(features)                     | void    | 添加多个要素                           |
-| removeFeature(feature)                    | Feature | 移除单个要素（返回被移除的要素）       |
-| removeFeatures(features)                  | void    | 移除多个要素                           |
-| getFeatureById(id)                        | Feature | 根据 ID 获取要素                       |
-| getFeatures()                             | Array   | 获取所有要素                           |
-| getFeaturesInExtent(extent)               | Array   | 获取指定范围内的要素（需开启空间索引） |
-| getClosestFeatureToCoordinate(coordinate) | Feature | 根据坐标获取最近要素                   |
-| forEachFeature(callback)                  | void    | 遍历所有要素                           |
-| forEachFeatureInExtent(extent, callback)  | void    | 在指定范围内遍历要素（需开启空间索引） |
-| clear()                                   | void    | 清除所有要素                           |
+| 方法名                                      | 返回值    | 描述                                   |
+| ------------------------------------------- | --------- | -------------------------------------- |
+| `addFeature(feature)`                       | `void`    | 添加单个要素                           |
+| `addFeatures(features)`                     | `void`    | 添加多个要素                           |
+| `removeFeature(feature)`                    | `Feature` | 移除单个要素（返回被移除的要素）       |
+| `removeFeatures(features)`                  | `void`    | 移除多个要素                           |
+| `getFeatureById(id)`                        | `Feature` | 根据 ID 获取要素                       |
+| `getFeatures()`                             | `Array`   | 获取所有要素                           |
+| `getFeaturesInExtent(extent)`               | `Array`   | 获取指定范围内的要素（需开启空间索引） |
+| `getClosestFeatureToCoordinate(coordinate)` | `Feature` | 根据坐标获取最近要素                   |
+| `forEachFeature(callback)`                  | `void`    | 遍历所有要素                           |
+| `forEachFeatureInExtent(extent, callback)`  | `void`    | 在指定范围内遍历要素（需开启空间索引） |
+| `clear()`                                   | `void`    | 清除所有要素                           |
 
 ##### 矢量要素创建
 
-- 以下为创建一个最基础的矢量要素（点），更多矢量图层属性参考[矢量图形](./08_常见矢量图形.md)，
+- 以下为创建一个最基础的矢量要素（点），更多矢量图层属性参考[矢量图形](./08_矢量图形.md)，
 - 创建顺序为`Feature -> VectorSource（features 属性加载） -> VectorLayer`
-- 下例代码中`Style`,我们接下来会讲解其属性
 
 ```js
 import Feature from "ol/Feature.js";
@@ -334,26 +337,24 @@ map.addLayer(geojsonLayer);
 
 ### Style - 样式
 
-样式系统用于控制矢量要素（点、线、面）的视觉呈现
+控制矢量要素外观的核心机制，支持静态样式和动态样式函数。
 
-| 组件名       | 导入路径              | 描述                           |
-| ------------ | --------------------- | ------------------------------ |
-| Style        | ol/style/Style        | 样式容器，组合其他样式组件     |
-| Fill         | ol/style/Fill         | 填充样式（用于面要素）         |
-| Stroke       | ol/style/Stroke       | 描边样式（用于线和面的边界）   |
-| Text         | ol/style/Text         | 文本标注样式                   |
-| Icon         | ol/style/Icon         | 图标样式（用于点要素）         |
-| Circle       | ol/style/Circle       | 圆形样式（用于点要素）         |
-| RegularShape | ol/style/RegularShape | 规则形状样式（三角形、星形等） |
+#### 基础样式组件
+
+| 组件           | 作用       | 示例                                                       |
+| -------------- | ---------- | ---------------------------------------------------------- |
+| `Fill`         | 填充颜色   | `new Fill({ color: 'red' })`                               |
+| `Stroke`       | 描边样式   | `new Stroke({ color: 'blue', width: 2 })`                  |
+| `Circle`       | 圆形图标   | `new Circle({ radius: 10, fill: ... })`                    |
+| `Icon`         | 图片图标   | `new Icon({ src: 'pin.png' })`                             |
+| `Text`         | 文本标注   | `new Text({ text: '北京', font: 'bold 14px sans-serif' })` |
+| `RegularShape` | 自定义形状 | `new RegularShape({ radius: 10, fill: ... })`              |
 
 #### 基本样式
-
-常用配置在代码中都已经添加，比较简单，就不单独提取模块说明了
 
 ```js
 import { Style, Fill, Stroke, Circle, Text } from "ol/style";
 
-// 点要素样式
 const pointStyle = new Style({
   image: new Circle({
     radius: 10, // 半径
@@ -370,25 +371,13 @@ const pointStyle = new Style({
     }),
     rotation: Math.PI / 4, // 文本旋转角度（弧度）
   }),
-});
-
-// 线要素样式
-const lineStyle = new Style({
   stroke: new Stroke({
     color: "blue",
     width: 3,
     lineDash: [10, 5], // 虚线模式
   }),
-});
-
-// 面要素样式
-const polygonStyle = new Style({
   fill: new Fill({
     color: "rgba(0, 255, 0, 0.3)", // 带透明度的绿色
-  }),
-  stroke: new Stroke({
-    color: "green",
-    width: 2,
   }),
 });
 ```
@@ -399,7 +388,7 @@ const polygonStyle = new Style({
 
 ```js
 // 设置动态样式函数
-feature.setStyle((feature, resolution) => {
+const getStyle = (feature, resolution) => {
   const size = resolution < 100 ? 10 : 5;
   return new Style({
     image: new CircleStyle({
@@ -407,7 +396,8 @@ feature.setStyle((feature, resolution) => {
       fill: new Fill({ color: "blue" }),
     }),
   });
-});
+};
+vectorLayer.setStyle(getStyle);
 ```
 
 #### 图标样式
@@ -435,7 +425,7 @@ const iconStyle = new Style({
 
 ## 4. VectorTileLayer - 矢量瓦片图层
 
-用于加载如 Mapbox、GeoServer 发布的矢量瓦片。
+加载矢量瓦片（如 Mapbox Vector Tiles），在客户端动态渲染样式。
 
 ```js
 import VectorTileLayer from "ol/layer/VectorTile";
@@ -454,16 +444,16 @@ const vectorTileLayer = new VectorTileLayer({
 
 ## 5. HeatmapLayer - 热力图层
 
-热力图是一种用颜色渐变来表现数据点密度或强度的可视化方式，特别适合展示大量点数据的分布情况。通过 `ol/layer/Heatmap` 类实现，它将点要素（Point）数据转换为连续的颜色渐变表面
+将点数据转换为热力图，表现密度分布。
 
-特有属性：
+### 特有属性
 
-| 属性名   | 类型             | 默认值                                   | 描述                                       |
-| -------- | ---------------- | ---------------------------------------- | ------------------------------------------ |
-| blur     | number           | 15                                       | 模糊半径（像素），控制热力点的扩散程度     |
-| radius   | number           | 8                                        | 点半径（像素），控制热力点的初始大小       |
-| gradient | Array            | ['#00f', '#0ff', '#0f0', '#ff0', '#f00'] | 颜色渐变数组，至少需两个颜色               |
-| weight   | string\|function | 'weight'                                 | 权重字段名或计算函数（用于调整点的重要性） |
+| 属性名     | 类型               | 默认值                                 | 描述              |
+| ---------- | ------------------ | -------------------------------------- | ----------------- |
+| `blur`     | `number`           | `15`                                   | 模糊半径（像素）  |
+| `radius`   | `number`           | `8`                                    | 点半径（像素）    |
+| `gradient` | `Array<string>`    | `['#00f','#0ff','#0f0','#ff0','#f00']` | 颜色渐变数组      |
+| `weight`   | `string\|function` | `'weight'`                             | 权重字段/计算函数 |
 
 数据源必须包含点要素
 
@@ -498,7 +488,7 @@ map.addLayer(heatmapLayer);
 
 ## 6. GroupLayer - 图层组
 
-GroupLayer（图层组）是 OpenLayers 中用于组织和管理多个图层的容器,对整个图层组进行统一控制
+管理多个图层的容器，可统一控制组内所有图层。
 
 ### 核心方法
 

@@ -1,18 +1,20 @@
 # Controls 对象
 
-## 控件类型
+Controls 是 OpenLayers 中提供用户交互界面的 UI 组件，用于展示地图信息和操作地图功能。
 
-| 控件类型      | 描述                             |
-| ------------- | -------------------------------- |
-| Zoom          | 缩放控件                         |
-| Rotate        | 旋转控件，alt+shift+左键旋转地图 |
-| FullScreen    | 全屏控件                         |
-| Attribution   | 版权信息控件                     |
-| ScaleLine     | 比例尺控件                       |
-| MousePosition | 鼠标位置控件                     |
-| OverviewMap   | 概览图控件                       |
-| ZoomSlider    | 滑动缩放控件                     |
-| ZoomToExtent  | 缩放到范围控件                   |
+## 控件类型一览
+
+| 控件类型          | 引入路径                   | 功能描述         | 默认启用 |
+| ----------------- | -------------------------- | ---------------- | -------- |
+| **Zoom**          | `ol/control/Zoom`          | 缩放按钮 (+/-)   | ✔️       |
+| **Rotate**        | `ol/control/Rotate`        | 旋转复位按钮     | ✔️       |
+| **Attribution**   | `ol/control/Attribution`   | 版权信息展示     | ✔️       |
+| **FullScreen**    | `ol/control/FullScreen`    | 全屏切换按钮     | ❌       |
+| **ScaleLine**     | `ol/control/ScaleLine`     | 比例尺指示器     | ❌       |
+| **MousePosition** | `ol/control/MousePosition` | 鼠标坐标显示     | ❌       |
+| **OverviewMap**   | `ol/control/OverviewMap`   | 鹰眼图（小地图） | ❌       |
+| **ZoomSlider**    | `ol/control/ZoomSlider`    | 缩放滑块         | ❌       |
+| **ZoomToExtent**  | `ol/control/ZoomToExtent`  | 区域定位按钮     | ❌       |
 
 ### 默认控件集合
 

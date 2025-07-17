@@ -1,26 +1,26 @@
 # 概述
 
-Interaction（交互）是 OpenLayers 中处理用户与地图交互的核心机制，它使开发者能够创建丰富的交互式地图应用。交互类提供了多种内置交互行为，包括绘制、选择、修改、平移、缩放等。
+Interaction 是 OpenLayers 中处理用户交互的核心机制，提供丰富的交互式地图体验。
 
-- 基本使用已经在 map 中讲解过，这里主要讲`PointerInteraction`和`Select`，这两种交互在开发中频繁使用。[基本使用传送门](./02_map%E5%AF%B9%E8%B1%A1.html#interactions)
+- [基本使用](./02_map%E5%AF%B9%E8%B1%A1.html#interactions)已经在 map 中讲解过，这里主要讲`PointerInteraction`、`Select`和默认交互
 
 ## 默认交互集合
 
-在讲解`PointerInteraction`和`Select`之前，先说明一下地图默认交互。
-
 在`ol/interaction/defaults`类中定义了默认交互集合。
 
-- `altShiftDragRotate`：启用 alt+shift+拖动旋转功能（默认为 true）
-- `onFocusOnly`：仅在地图元素获得焦点时才启用交互（默认为 false）
-- `doubleClickZoom`：启用双击缩放功能（默认为 true）
-- `keyboard`：启用键盘交互功能（默认为 true）
-- `mouseWheelZoom`：启用鼠标滚轮缩放功能（默认为 true）
-- `shiftDragZoom`：启用 shift+拖动缩放功能（默认为 true）
-- `dragPan`：启用拖拽平移功能（默认为 true）
-- `pinchRotate`：启用双指旋转功能（默认为 true）
-- `pinchZoom`：启用双指捏合缩放功能（默认为 true）
-- `zoomDelta`：缩放增量（类型：number）
-- `zoomDuration`：缩放动画持续时间（单位：毫秒，类型：number）
+| 参数                 | 类型    | 默认值 | 功能描述                                         |
+| -------------------- | ------- | ------ | ------------------------------------------------ |
+| `altShiftDragRotate` | boolean | true   | 启用 alt+shift+拖动旋转功能（默认为 true）       |
+| `onFocusOnly`        | boolean | false  | 仅在地图元素获得焦点时才启用交互（默认为 false） |
+| `doubleClickZoom`    | boolean | true   | 启用双击缩放功能（默认为 true）                  |
+| `keyboard`           | boolean | true   | 启用键盘交互功能（默认为 true）                  |
+| `mouseWheelZoom`     | boolean | true   | 启用鼠标滚轮缩放功能（默认为 true）              |
+| `shiftDragZoom`      | boolean | true   | 启用 shift+拖动缩放功能（默认为 true）           |
+| `dragPan`            | boolean | true   | 启用拖拽平移功能（默认为 true）                  |
+| `pinchRotate`        | boolean | true   | 启用双指旋转功能（默认为 true）                  |
+| `pinchZoom`          | boolean | true   | 启用双指捏合缩放功能（默认为 true）              |
+| `zoomDelta`          | number  | -      | 缩放增量（类型：number）                         |
+| `zoomDuration`       | number  | -      | 缩放动画持续时间（单位：毫秒，类型：number）     |
 
 ```js
 import { defaults as defaultInteractions } from "ol/interaction/defaults";
@@ -57,17 +57,17 @@ PointerInteraction 是 OpenLayers 中处理指针事件（鼠标、触摸、笔�
 
 允许用户通过在地图上点击和拖动来绘制矢量框，通常与一个 ol/events/condition 结合使用,[condition 类型](./99_%E5%B8%B8%E7%94%A8api.html#condition)
 
-**常用配置**：
+#### 常用配置
 
 - `className`：矩形框的 CSS 类名（默认为`ol-dragbox`）
 - `condition`：触发条件（默认为`mouseActionButton`，鼠标拖拽即绘制）
 - `minArea`：矩形的最小面积（小于此面积则不触发操作，默认为 64 像素）
 
-**核心方法**：
+#### 核心方法
 
 - `getGeometry()`：获取矩形框的几何对象（返回一个 ol/geom/Polygon 类型）
 
-**核心事件**：
+#### 核心事件
 
 - `boxstart`：开始绘制时触发
 - `boxdrag`：拖拽过程中触发（移动鼠标时）
@@ -77,8 +77,8 @@ PointerInteraction 是 OpenLayers 中处理指针事件（鼠标、触摸、笔�
 
 DragZoom 是 DragBox 的直接子类，专门用于实现拖拽矩形区域缩放的功能。当用户完成矩形绘制后，地图会自动缩放到该区域。
 
-- 使用方式和`DragBox`一样
-- 常用配置较`DragBox`多一个`duration`：动画持续时间（毫秒），默认 200
+> - 使用方式和`DragBox`一样
+> - 常用配置较`DragBox`多一个`duration`：动画持续时间（毫秒），默认 200
 
 这里我以 DrawZoom 为例，实现区域选择
 
@@ -168,24 +168,43 @@ onMounted(async () => {
 
 允许用户通过拖动地图来平移地图，默认已启用
 
-**常用配置**：
+#### 常用配置
 
 - `condition`：是否应处理该事件（默认为`noModifierKeys`和`primaryAction`）
+
+```js
+import DragPan from "ol/interaction/DragPan";
+import { noModifierKeys } from "ol/events/condition";
+
+new DragPan({
+  condition: noModifierKeys,
+});
+```
 
 ### DragRotateAndZoom
 
 允许用户通过点击和拖动地图来缩放和旋转地图。默认情况下，此交互仅在按住 Shift 键时受限
 
-**常用配置**：
+#### 常用配置
 
 - `condition`：是否应处理该事件（默认为`shiftKeyOnly`）
 - `duration`：动画持续时间（毫秒），默认 400
+
+```js
+import DragRotateAndZoom from "ol/interaction/DragRotateAndZoom";
+import { shiftKeyOnly } from "ol/events/condition";
+
+new DragRotateAndZoom({
+  condition: shiftKeyOnly,
+  duration: 400,
+});
+```
 
 ### DragRotate
 
 允许用户通过点击和拖动地图来旋转地图，仅当同时按下 alt 和 shift 键时才生效
 
-**常用配置**：
+#### 常用配置
 
 - `condition`：是否应处理该事件（默认为`altShiftKeysOnly`）
 - `duration`：动画持续时间（毫秒），默认 250
@@ -194,7 +213,7 @@ onMounted(async () => {
 
 `Draw` 交互是 OpenLayers 中最常用的交互之一，它允许用户在地图上绘制各种几何图形
 
-**核心功能**
+#### 核心功能
 
 - 绘制点、线、多边形、圆等几何图形
 - 支持自由绘制（freehand）模式
@@ -909,6 +928,12 @@ const toggleTranslate = () => {
 ```
 
 :::
+
+<video controls width="600">
+  <source src="../Aassets/平移.mp4" type="video/mp4" />
+  您的浏览器不支持HTML5视频标签。
+</video>
+
 
 ## Select
 

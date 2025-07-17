@@ -1,8 +1,9 @@
 # Source 源
 
-Source 是 OpenLayers 中用于获取图层数据的源，不同的 Source 子类对应不同类型的数据源（如 WMS、WMTS、Vector 等）。
+> Source 是 OpenLayers 的数据引擎，负责获取和转换原始地理数据，与 Layer 协同工作实现地图可视化。  
+> **设计哲学**：Source 处理数据获取，Layer 负责渲染呈现。
 
-`Layer`和`Source`不分家，每一个`Layer`都有一个`Source`，`Layer`负责数据的渲染，`Source`负责数据的获取，所以`Source`的大部分内容我都放在与`Layer`一起说明过了
+我们已经在 Layer 部分介绍了大部分 Source，这里补充了聚类（Cluster）的用法
 
 ## Source 类型
 
@@ -34,11 +35,11 @@ Source 是 OpenLayers 中用于获取图层数据的源，不同的 Source 子�
 
 ## Source 介绍
 
-Source 类型很多，常用的也就几种，学习起来也很轻松，下面这几种我们在 layer 中也基本上介绍的差不多了
+Source 类型很多，常用的下图中的几种我们在 Layer 中已经介绍完
 
 ![Source 类型](../Aassets/Source.png)
 
-## 聚类（Cluster）
+## 补充介绍聚类（Cluster）
 
 聚类数据源在项目中比较常用，这里补充介绍一下。`ol/source/Cluster`类中定义了聚类的相关属性和方法。
 
