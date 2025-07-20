@@ -17,7 +17,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Openlayers基础", link: "/openlayers/Basics/00_简介.md" },
-      { text: "实践", link: "/openlayers/Practice/01_图层控制.md" },
+      { text: "Leaflet基础", link: "/leaflet/Basics/00_简介.md" },
+      { text: "Openlayers实践", link: "/openlayers/Practice/01_图层控制.md" },
       {
         text: "外部链接",
         items: [
@@ -73,6 +74,33 @@ export default defineConfig({
             { text: "extent", link: "/openlayers/Basics/10_extent.md" },
             { text: "知识补充", link: "/openlayers/Basics/50_知识补充.md" },
             { text: "API补充", link: "/openlayers/Basics/99_常用api.md" },
+          ],
+        },
+      ],
+      "/leaflet/Basics/": [
+        {
+          text: "Leaflet基础",
+          items: [
+            { text: "介绍", link: "/leaflet/Basics/00_简介.md" },
+            { text: "快速开始", link: "/leaflet/Basics/01_快速开始" },
+            // { text: "Map对象", link: "/leaflet/Basics/02_map对象" },
+            // { text: "UI图层", link: "/leaflet/Basics/03_UI图层" },
+            // { text: "栅格图层", link: "/leaflet/Basics/04_栅格图层" },
+            // { text: "矢量图层", link: "/leaflet/Basics/05_矢量图层" },
+            // { text: "图层补充", link: "/leaflet/Basics/06_图层补充" },
+            // { text: "控件", link: "/leaflet/Basics/07_控件" },
+            { text: "案例_坐标获取", link: "/leaflet/Basics/101_综合案例_坐标获取.md" },
+            { text: "案例_图层控制", link: "/leaflet/Basics/102_综合案例_图层控制.md" },
+            { text: "案例_图层控制控件", link: "/leaflet/Basics/103_综合案例_图层控制器.md" },
+            { text: "案例_聚类图层", link: "/leaflet/Basics/104_综合案例_聚类图层.md" },
+            { text: "案例_绘制图层", link: "/leaflet/Basics/105_综合案例_绘制图层.md" },
+            { text: "案例_热力图", link: "/leaflet/Basics/106_综合案例_热力图.md" },
+            { text: "案例_路径规划", link: "/leaflet/Basics/107_综合案例_路径规划.md" },
+            { text: "案例_动态数据", link: "/leaflet/Basics/108_综合案例_动态数据.md" },
+            { text: "案例_自定义弹窗", link: "/leaflet/Basics/109_综合案例_自定义弹窗.md" },
+            { text: "案例_加载WMS", link: "/leaflet/Basics/110_综合案例_加载WMS.md" },
+            { text: "案例_量测工具", link: "/leaflet/Basics/111_综合案例_量测工具.md" },
+            { text: "案例_地图截图", link: "/leaflet/Basics/112_综合案例_地图截图.md" },
           ],
         },
       ],
@@ -134,12 +162,6 @@ export default defineConfig({
           ],
         },
       ],
-      // "/UpdateLog/": [
-      //   {
-      //     text: "更新日志",
-      //     items: [{ text: "更新日志", link: "/UpdateLog/cesiumlog.md" }],
-      //   },
-      // ],
     },
 
     socialLinks: [
