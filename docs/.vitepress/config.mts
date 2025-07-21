@@ -18,6 +18,7 @@ export default defineConfig({
     nav: [
       { text: "Openlayers基础", link: "/openlayers/Basics/00_简介.md" },
       { text: "Leaflet基础", link: "/leaflet/Basics/00_简介.md" },
+      { text: "知识补充", link: "/knowledge/00_引言.md" },
       { text: "Openlayers实践", link: "/openlayers/Practice/01_图层控制.md" },
       {
         text: "外部链接",
@@ -103,6 +104,19 @@ export default defineConfig({
             { text: "案例_地图截图", link: "/leaflet/Basics/112_综合案例_地图截图.md" },
           ],
         },
+      ],
+      "/knowledge":[
+         {
+          text: "Leaflet基础",
+          items: [
+            { text: "介绍", link: "/knowledge/00_引言.md" },
+            { text: "坐标系", link: "/knowledge/01_坐标系.md" },
+            { text: "地图服务", link: "/knowledge/02_地图服务.md" },
+            { text: "数据格式", link: "/knowledge/03_数据格式.md" },
+            { text: "常用插件", link: "/knowledge/04_常用插件.md" },
+            { text: "gis工具", link: "/knowledge/05_gis工具.md" },
+          ],
+        }
       ],
       "/openlayers/Practice/": [
         {
