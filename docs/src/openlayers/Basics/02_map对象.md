@@ -420,6 +420,9 @@ map.on("click", (event) => {
 #### 销毁地图
 
 ```js
-// 组件卸载时调用
+// 组件卸载时调用（方式一）
 map.dispose();
+
+// 组件卸载时调用（方式二）
+map.setTarget(null)
 ```
