@@ -158,9 +158,9 @@ export default defineConfig({
         {
           text: "Openlayers实践",
           items: [
-            // { text: "公共函数", link: "/Practice/基础/00_公共函数.md" },
             {
               text: "基础案例",
+              collapsed: true,
               items: [
                 {
                   text: "图层控制",
@@ -188,10 +188,6 @@ export default defineConfig({
                   link: "/openlayers/Practice/07_量测工具.md",
                 },
                 {
-                  text: "区域掩膜",
-                  link: "/openlayers/Practice/08_区域掩膜.md",
-                },
-                {
                   text: "动态闪烁",
                   link: "/openlayers/Practice/09_动态闪烁.md",
                 },
@@ -200,20 +196,44 @@ export default defineConfig({
                   link: "/openlayers/Practice/10_分屏对比.md",
                 },
                 {
+                  text: "底图颜色",
+                  link: "/openlayers/Practice/13_底图颜色.md",
+                },
+                {
+                  text: "切片调试与经纬网",
+                  link: "/openlayers/Practice/16_切片调试与经纬网.md",
+                },
+              ],
+            },
+            {
+              text: "高级案例",
+              collapsed: true,
+              items: [
+                {
+                  text: "区域掩膜",
+                  link: "/openlayers/Practice/08_区域掩膜.md",
+                },
+                {
+                  text: "台风模拟",
+                  link: "/openlayers/Practice/14_台风模拟.md",
+                },
+              ],
+            },
+            {
+              text: "第三方插件",
+              collapsed: true,
+              items: [
+                {
+                  text: "gif图加载",
+                  link: "/openlayers/Practice/15_加载gif图.md",
+                },
+                {
                   text: "ol-echarts",
                   link: "/openlayers/Practice/11_ol-echarts.md",
                 },
                 {
                   text: "ol-ext",
                   link: "/openlayers/Practice/12_ol-ext.md",
-                },
-                {
-                  text: "底图颜色",
-                  link: "/openlayers/Practice/13_底图颜色.md",
-                },
-                {
-                  text: "台风模拟",
-                  link: "/openlayers/Practice/14_台风模拟.md",
                 },
               ],
             },
