@@ -2,7 +2,7 @@
 
 Openlayers快速入门，中文学习教程
 
-## 开启您的三维地理可视化之旅！
+## 开启您的二维地理可视化之旅！
 
 - 项目地址：[http://o.ygyong.cn](http://o.ygyong.cn)
 

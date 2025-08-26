@@ -46,7 +46,7 @@ export default defineConfig({
           {
             text: "MyUI Map",
             link: "https://myui.vtj.pro/my/ui/map/",
-          },
+          }
         ],
       },
     ],
@@ -175,6 +175,10 @@ export default defineConfig({
                   link: "/openlayers/Practice/03_地图绘制.md",
                 },
                 {
+                  text: "绘制自定义形状",
+                  link: "/openlayers/Practice/18_绘制自定义形状.md",
+                },
+                {
                   text: "轨迹回放",
                   link: "/openlayers/Practice/04_轨迹回放.md",
                 },
@@ -203,6 +207,22 @@ export default defineConfig({
                   text: "切片调试与经纬网",
                   link: "/openlayers/Practice/16_切片调试与经纬网.md",
                 },
+                {
+                  text: "面元素顶点样式",
+                  link: "/openlayers/Practice/17_顶点样式.md",
+                },
+                {
+                  text: "动态数据",
+                  link: "/openlayers/Practice/19_动态数据.md",
+                },
+                {
+                  text: "即时渲染",
+                  link: "/openlayers/Practice/21_即时渲染.md",
+                },
+                {
+                  text: "Style属性调试",
+                  link: "/openlayers/Practice/20_Style属性调试.md",
+                },
               ],
             },
             {
@@ -212,6 +232,10 @@ export default defineConfig({
                 {
                   text: "区域掩膜",
                   link: "/openlayers/Practice/08_区域掩膜.md",
+                },
+                {
+                  text: "长度面积计算",
+                  link: "/openlayers/Practice/22_长度面积计算.md",
                 },
                 {
                   text: "台风模拟",
@@ -254,4 +278,18 @@ export default defineConfig({
       provider: "local",
     },
   },
+  vite: {
+    optimizeDeps: {
+      include: [
+        'monaco-editor/esm/vs/editor/editor.worker',
+        'monaco-editor/esm/vs/language/json/json.worker',
+        'monaco-editor/esm/vs/language/css/css.worker',
+        'monaco-editor/esm/vs/language/html/html.worker',
+        'monaco-editor/esm/vs/language/typescript/ts.worker'
+      ]
+    },
+    define: {
+      global: 'globalThis'
+    }
+  }
 });
