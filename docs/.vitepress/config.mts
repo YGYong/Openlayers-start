@@ -167,6 +167,10 @@ export default defineConfig({
                   link: "/openlayers/Practice/01_图层控制.md",
                 },
                 {
+                  text: "图层分辨率",
+                  link: "/openlayers/Practice/24_图层分辨率.md",
+                },
+                {
                   text: "点位聚合",
                   link: "/openlayers/Practice/02_点位聚合.md",
                 },
@@ -175,8 +179,12 @@ export default defineConfig({
                   link: "/openlayers/Practice/03_地图绘制.md",
                 },
                 {
-                  text: "绘制自定义形状",
-                  link: "/openlayers/Practice/18_绘制自定义形状.md",
+                  text: "绘制五角星",
+                  link: "/openlayers/Practice/18_绘制五角星.md",
+                },
+                {
+                  text: "自定义形状",
+                  link: "/openlayers/Practice/30_自定义形状.md",
                 },
                 {
                   text: "轨迹回放",
@@ -196,8 +204,16 @@ export default defineConfig({
                   link: "/openlayers/Practice/09_动态闪烁.md",
                 },
                 {
+                  text: "文本碰撞检测",
+                  link: "/openlayers/Practice/31_文本碰撞检测.md",
+                },
+                {
                   text: "分屏对比",
                   link: "/openlayers/Practice/10_分屏对比.md",
+                },
+                {
+                  text: "共享视图",
+                  link: "/openlayers/Practice/32_共享视图.md",
                 },
                 {
                   text: "底图颜色",
@@ -234,8 +250,32 @@ export default defineConfig({
                   link: "/openlayers/Practice/08_区域掩膜.md",
                 },
                 {
+                  text: "绘制箭头线",
+                  link: "/openlayers/Practice/25_绘制箭头线.md",
+                },
+                {
                   text: "长度面积计算",
                   link: "/openlayers/Practice/22_长度面积计算.md",
+                },
+                {
+                  text: "图层裁剪",
+                  link: "/openlayers/Practice/23_图层裁剪.md",
+                },
+                {
+                  text: "旋转和缩放",
+                  link: "/openlayers/Practice/26_旋转和缩放.md",
+                },
+                {
+                  text: "导出PNG",
+                  link: "/openlayers/Practice/27_导出PNG.md",
+                },
+                {
+                  text: "图层望远镜",
+                  link: "/openlayers/Practice/28_图层望远镜.md",
+                },
+                {
+                  text: "图层放大",
+                  link: "/openlayers/Practice/29_图层放大.md",
                 },
                 {
                   text: "台风模拟",
@@ -258,6 +298,20 @@ export default defineConfig({
                 {
                   text: "ol-ext",
                   link: "/openlayers/Practice/12_ol-ext.md",
+                },
+              ],
+            },
+            {
+              text: "其余案例",
+              collapsed: true,
+              items: [
+                {
+                  text: "不同字体",
+                  link: "/openlayers/Practice/100_不同字体.md",
+                },
+                {
+                  text: "渲染到任意画布",
+                  link: "/openlayers/Practice/101_渲染到任意画布.md",
                 },
               ],
             },
