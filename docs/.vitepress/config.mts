@@ -46,7 +46,7 @@ export default defineConfig({
           {
             text: "MyUI Map",
             link: "https://myui.vtj.pro/my/ui/map/",
-          }
+          },
         ],
       },
     ],
@@ -258,6 +258,10 @@ export default defineConfig({
                   link: "/openlayers/Practice/22_长度面积计算.md",
                 },
                 {
+                  text: "追踪要素",
+                  link: "/openlayers/Practice/35_追踪要素.md",
+                },
+                {
                   text: "图层裁剪",
                   link: "/openlayers/Practice/23_图层裁剪.md",
                 },
@@ -284,6 +288,20 @@ export default defineConfig({
               ],
             },
             {
+              text: "WebGL",
+              collapsed: true,
+              items: [
+                {
+                  text: "海量数据",
+                  link: "/openlayers/Practice/36_海量数据.md",
+                },
+                {
+                  text: "精灵图",
+                  link: "/openlayers/Practice/37_精灵图.md",
+                },
+              ],
+            },
+            {
               text: "第三方插件",
               collapsed: true,
               items: [
@@ -292,12 +310,20 @@ export default defineConfig({
                   link: "/openlayers/Practice/15_加载gif图.md",
                 },
                 {
+                  text: "平滑算法",
+                  link: "/openlayers/Practice/34_平滑算法.md",
+                },
+                {
                   text: "ol-echarts",
                   link: "/openlayers/Practice/11_ol-echarts.md",
                 },
                 {
                   text: "ol-ext",
                   link: "/openlayers/Practice/12_ol-ext.md",
+                },
+                {
+                  text: "风场ol-wind",
+                  link: "/openlayers/Practice/38_风场ol-wind.md",
                 },
               ],
             },
@@ -313,8 +339,66 @@ export default defineConfig({
                   text: "渲染到任意画布",
                   link: "/openlayers/Practice/101_渲染到任意画布.md",
                 },
+                {
+                  text: "沿线文本",
+                  link: "/openlayers/Practice/33_沿线文本.md",
+                },
+                {
+                  text: "风箭",
+                  link: "/openlayers/Practice/102_风箭.md",
+                },
+                {
+                  text: "海平面上升",
+                  link: "/openlayers/Practice/103_海平面上升.md",
+                },
               ],
             },
+            {
+              text: "基础篇案例",
+              collapsed: true,
+              items: [
+                {
+                  text: "加载高德瓦片",
+                  link: "/openlayers/Practice/200_加载高德瓦片.md",
+                },
+                {
+                  text: "叠加元素",
+                  link: "/openlayers/Practice/201_overlay.md",
+                },
+                {
+                  text:"聚合图层",
+                  link:"/openlayers/Practice/202_聚合图层.md",
+                },
+                {
+                  text:"定位跳转",
+                  link:"/openlayers/Practice/203_定位跳转.md",
+                },
+                {
+                  text:"框选缩放",
+                  link:"/openlayers/Practice/204_框选缩放.md",
+                },
+                {
+                  text:"基础绘制",
+                  link:"/openlayers/Practice/205_基础绘制.md",
+                },
+                {
+                  text:"extent修改",
+                  link:"/openlayers/Practice/206_extent修改.md",
+                },
+                {
+                  text:"基础编辑",
+                  link:"/openlayers/Practice/207_基础编辑.md",
+                },
+                {
+                  text:"基础平移",
+                  link:"/openlayers/Practice/208_基础平移.md",
+                },
+                {
+                  text:"基础选择",
+                  link:"/openlayers/Practice/209_基础选择.md",
+                }
+              ],
+            }
           ],
         },
       ],
@@ -335,15 +419,15 @@ export default defineConfig({
   vite: {
     optimizeDeps: {
       include: [
-        'monaco-editor/esm/vs/editor/editor.worker',
-        'monaco-editor/esm/vs/language/json/json.worker',
-        'monaco-editor/esm/vs/language/css/css.worker',
-        'monaco-editor/esm/vs/language/html/html.worker',
-        'monaco-editor/esm/vs/language/typescript/ts.worker'
-      ]
+        "monaco-editor/esm/vs/editor/editor.worker",
+        "monaco-editor/esm/vs/language/json/json.worker",
+        "monaco-editor/esm/vs/language/css/css.worker",
+        "monaco-editor/esm/vs/language/html/html.worker",
+        "monaco-editor/esm/vs/language/typescript/ts.worker",
+      ],
     },
     define: {
-      global: 'globalThis'
-    }
-  }
+      global: "globalThis",
+    },
+  },
 });
