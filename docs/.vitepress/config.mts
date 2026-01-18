@@ -3,8 +3,21 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "二维地图快速入门",
+  sitemap: {
+    hostname: "http://o.ygyong.cn",
+  },
   description: "openlayers、Leaflet、Mapbox快速入门",
-  head: [["link", { rel: "icon", href: "/favicon.ico" }]],
+  head: [
+    ["link", { rel: "icon", href: "/favicon.ico" }],
+    // [
+    //   "meta",
+    //   {
+    //     name: "description",
+    //     content:
+    //       "二维地图快速入门，openlayers中文网、Leaflet中文教程、Webgis入门",
+    //   },
+    // ],
+  ],
   srcDir: "src",
   // lastUpdated: true,
   themeConfig: {
@@ -20,6 +33,7 @@ export default defineConfig({
       { text: "Leaflet基础", link: "/leaflet/Basics/00_简介.md" },
       { text: "知识补充", link: "/knowledge/00_引言.md" },
       { text: "Openlayers实践", link: "/openlayers/Practice/01_图层控制.md" },
+      // { text: "赞助", link: "/openlayers/声明.md" },
       {
         text: "外部链接",
         items: [
@@ -366,39 +380,39 @@ export default defineConfig({
                   link: "/openlayers/Practice/201_overlay.md",
                 },
                 {
-                  text:"聚合图层",
-                  link:"/openlayers/Practice/202_聚合图层.md",
+                  text: "聚合图层",
+                  link: "/openlayers/Practice/202_聚合图层.md",
                 },
                 {
-                  text:"定位跳转",
-                  link:"/openlayers/Practice/203_定位跳转.md",
+                  text: "定位跳转",
+                  link: "/openlayers/Practice/203_定位跳转.md",
                 },
                 {
-                  text:"框选缩放",
-                  link:"/openlayers/Practice/204_框选缩放.md",
+                  text: "框选缩放",
+                  link: "/openlayers/Practice/204_框选缩放.md",
                 },
                 {
-                  text:"基础绘制",
-                  link:"/openlayers/Practice/205_基础绘制.md",
+                  text: "基础绘制",
+                  link: "/openlayers/Practice/205_基础绘制.md",
                 },
                 {
-                  text:"extent修改",
-                  link:"/openlayers/Practice/206_extent修改.md",
+                  text: "extent修改",
+                  link: "/openlayers/Practice/206_extent修改.md",
                 },
                 {
-                  text:"基础编辑",
-                  link:"/openlayers/Practice/207_基础编辑.md",
+                  text: "基础编辑",
+                  link: "/openlayers/Practice/207_基础编辑.md",
                 },
                 {
-                  text:"基础平移",
-                  link:"/openlayers/Practice/208_基础平移.md",
+                  text: "基础平移",
+                  link: "/openlayers/Practice/208_基础平移.md",
                 },
                 {
-                  text:"基础选择",
-                  link:"/openlayers/Practice/209_基础选择.md",
-                }
+                  text: "基础选择",
+                  link: "/openlayers/Practice/209_基础选择.md",
+                },
               ],
-            }
+            },
           ],
         },
       ],
